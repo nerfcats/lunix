@@ -26,10 +26,11 @@
 *.a
 *.lib
 
-/lunix/build
-/lunix-bl/build
-!/lunix-bl/build/post-build.sh
 # Executables
 *.exe
 *.out
 *.app
+
+/lunix/build
+/lunix-bl/build
+!/lunix-bl/build/post-build.sh
