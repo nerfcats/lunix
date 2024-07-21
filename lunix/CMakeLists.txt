@@ -9,7 +9,6 @@ add_executable(lunix
     kernel/net/network.cpp
     kernel/disk/disk.cpp
     kernel/lsh.cpp
-    kernel/windowserver/windowserver.cpp
 )
 
 target_link_libraries(lunix stdc++fs)

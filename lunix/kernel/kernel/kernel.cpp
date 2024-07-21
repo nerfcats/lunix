@@ -18,7 +18,6 @@
 #include "../net/network.h"
 #include "../disk/disk.h"
 #include "../lsh.h"
-#include "../windowserver/windowserver.h"
 
 using namespace std;
 using namespace std::experimental::filesystem;
