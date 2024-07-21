@@ -1,7 +1,7 @@
 #include "kernel.h"
 #include <iostream>
 #include <fstream>
-#include <experimental/filesystem> // KDevelop does not like filesystem only
+#include <filesystem>
 #include <thread>
 #include <chrono>
 #include <unistd.h> // for geteuid
@@ -20,7 +20,7 @@
 #include "../lsh.h"
 
 using namespace std;
-using namespace std::experimental::filesystem;
+using namespace std::filesystem;
 using namespace ANSIColors;
 
 int oops_count = 0;
