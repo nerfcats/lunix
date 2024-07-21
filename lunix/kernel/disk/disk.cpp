@@ -2,12 +2,12 @@
 #include "../kernel/kernel.h"
 #include <iostream>
 #include <fstream>
-#include <experimental/filesystem>
+#include <filesystem>
 
 using namespace std;
-using namespace std::experimental::filesystem;
+using namespace std::filesystem;
 
-namespace fs = std::experimental::filesystem;
+namespace fs = std::filesystem;
 
 kernel Kernel;
 
