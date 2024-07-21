@@ -3,6 +3,8 @@ Lunix is a very cool simulation hobby OS written in C++
 ## Build Instructions
 To run Lunix you need to build both the kernel and the bootloader.
 
+I've made a script to do this automatically, in the main Lunix directory, type `./Build.sh` to build Lunix for first time. To rebuild type `./Build.sh --rebuild`.
+
 You have to build the kernel and bootloader in order. Kernel first then bootloader second
 
 To build the kernel:
