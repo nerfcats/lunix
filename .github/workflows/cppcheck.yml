@@ -10,22 +10,22 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Install Cppcheck and xmllint
+    - name: Install Cppcheck and xsltproc
       run: |
         sudo apt-get update
         sudo apt-get install -y cppcheck
-        sudo apt-get install -y libxml2-utils
+        sudo apt-get install -y xsltproc
 
     - name: Run Cppcheck
       run: |
         cppcheck --enable=all --inconclusive --xml --xml-version=2 . 2> cppcheck-report.xml
 
-    - name: Format Cppcheck XML
+    - name: Transform Cppcheck XML to HTML
       run: |
-        xmllint --format cppcheck-report.xml > cppcheck-report-formatted.xml
+        xsltproc .github/xsl/cppcheck-stylesheet.xsl cppcheck-report.xml > cppcheck-report.html
 
     - name: Upload Cppcheck report
       uses: actions/upload-artifact@v3
       with:
         name: cppcheck-report
-        path: cppcheck-report-formatted.xml
+        path: cppcheck-report.html
