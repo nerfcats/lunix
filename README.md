@@ -1,4 +1,7 @@
-# Lunix ![Lunix Logo](https://github.com/noahdossan/Lunix/blob/59b9e7d90a7bdcbc3a6119e00a31a14058005577/images/logo.png)
+<img src="https://github.com/noahdossan/Lunix/blob/59b9e7d90a7bdcbc3a6119e00a31a14058005577/images/logo.png" alt="Lunix logo" title="Lunix" align="right" height="60" />
+
+# Lunix
+
 Lunix is a very cool simulation hobby OS written in C++
 
 [![CMake on a single platform](https://github.com/noahdossan/Lunix/actions/workflows/cmake-single-platform.yml/badge.svg)](https://github.com/noahdossan/Lunix/actions/workflows/cmake-single-platform.yml)
