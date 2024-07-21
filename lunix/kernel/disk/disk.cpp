@@ -16,27 +16,31 @@ extern error_handler ErrHandler;
 disk::disk() {}
 
 void disk::rootfs() {
-    string path = "rootfs";
-    string usr_input;
-    if (!exists(path)) {
-        cout << "\nThe rootfs directory doesn't exist. Make new rootfs at " << current_path() << "? (y/n): ";
-        cin >> usr_input;
+    std::string path = "rootfs";
+    std::string usr_input;
+
+    if (!fs::exists(path)) {
+        std::cout << "\nThe rootfs directory doesn't exist. Make new rootfs at " << fs::current_path() << "? (y/n): ";
+        std::getline(std::cin, usr_input); // Use getline to capture input
+
         if (usr_input == "y" || usr_input == "Y") {
-            cout << "Creating rootfs...";
-            if (create_directory(path)) {
-                cout << "done\n";
+            std::cout << "Creating rootfs...";
+            if (fs::create_directory(path)) {
+                std::cout << "done\n";
             } else {
                 ErrHandler.panic("Failed to mount rootfs");
             }
         } else if (usr_input == "n" || usr_input == "N") {
             ErrHandler.panic("Failed to mount rootfs");
         } else {
-            disk::rootfs();
+            std::cout << "Invalid input. Please enter 'y' or 'n'.\n";
+            disk::rootfs(); // Retry if invalid input
         }
-    } else if (exists(path)) {
-        cout << "done\n";
+    } else {
+        std::cout << "done\n";
     }
 }
+
 
 int disk::fopen(const std::string& filename, std::ios::openmode mode) {
     fs.open(filename, mode);
