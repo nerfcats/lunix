@@ -62,4 +62,6 @@ make -j$(nproc)
 Once you build the bootloader it will run a `post-build.sh` script. If it returns an error make sure you built the lunix kernel properly.
 
 ## Running Lunix
-Go to the bootloader directory (lunix-bl) and type `./lunix-bl`. If it returns a file missing error run `./lunix-bl -b` to rerun the post build script.
+In the main directory where you cloned Lunix, run the Run.sh script with `./Run.sh`
+
+To run Lunix manually, go to the bootloader directory (lunix-bl) and type `./lunix-bl`. If it returns a file missing error run `./lunix-bl -b` to rerun the post build script.
