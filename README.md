@@ -2,7 +2,7 @@
 
 # Lunix
 
-[![kernel build](https://github.com/noahdossan/Lunix/actions/workflows/cmake-single-platform.yml/badge.svg)](https://github.com/noahdossan/Lunix/actions/workflows/cmake-single-platform.yml)
+[![kernel build](https://github.com/noahdossan/Lunix/actions/workflows/kernel-build.yml/badge.svg)](https://github.com/noahdossan/Lunix/actions/workflows/kernel-build.yml)
 
 Lunix (Lulu's UNIX, Lulu being the name of my pup :3) is a very cool simulation hobby OS written in C++. It is a UNIX-clone and has several features such as file editing, kernel panics and "libraries" to handle stuff like Disk and Networking.
 
