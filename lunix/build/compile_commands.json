@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/noah/projects/lunix/build",
+  "command": "/usr/bin/c++  -isystem /usr/include/SDL2 -g -o CMakeFiles/lunix.dir/main.cpp.o -c /home/noah/projects/lunix/main.cpp",
+  "file": "/home/noah/projects/lunix/main.cpp"
+},
+{
+  "directory": "/home/noah/projects/lunix/build",
+  "command": "/usr/bin/c++  -isystem /usr/include/SDL2 -g -o CMakeFiles/lunix.dir/kernel/kernel/kernel.cpp.o -c /home/noah/projects/lunix/kernel/kernel/kernel.cpp",
+  "file": "/home/noah/projects/lunix/kernel/kernel/kernel.cpp"
+},
+{
+  "directory": "/home/noah/projects/lunix/build",
+  "command": "/usr/bin/c++  -isystem /usr/include/SDL2 -g -o CMakeFiles/lunix.dir/kernel/net/network.cpp.o -c /home/noah/projects/lunix/kernel/net/network.cpp",
+  "file": "/home/noah/projects/lunix/kernel/net/network.cpp"
+},
+{
+  "directory": "/home/noah/projects/lunix/build",
+  "command": "/usr/bin/c++  -isystem /usr/include/SDL2 -g -o CMakeFiles/lunix.dir/kernel/disk/disk.cpp.o -c /home/noah/projects/lunix/kernel/disk/disk.cpp",
+  "file": "/home/noah/projects/lunix/kernel/disk/disk.cpp"
+},
+{
+  "directory": "/home/noah/projects/lunix/build",
+  "command": "/usr/bin/c++  -isystem /usr/include/SDL2 -g -o CMakeFiles/lunix.dir/kernel/lsh.cpp.o -c /home/noah/projects/lunix/kernel/lsh.cpp",
+  "file": "/home/noah/projects/lunix/kernel/lsh.cpp"
+},
+{
+  "directory": "/home/noah/projects/lunix/build",
+  "command": "/usr/bin/c++  -isystem /usr/include/SDL2 -g -o CMakeFiles/lunix.dir/kernel/windowserver/windowserver.cpp.o -c /home/noah/projects/lunix/kernel/windowserver/windowserver.cpp",
+  "file": "/home/noah/projects/lunix/kernel/windowserver/windowserver.cpp"
+}
+]
