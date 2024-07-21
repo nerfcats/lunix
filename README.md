@@ -32,11 +32,12 @@ To run Lunix you need to build both the kernel and the bootloader.
 
 ### Requirements
 To build Lunix, you need:
-- CMake
-- Make
-- GCC
+- cmake
+- make
+- gcc
+- libssl-dev
 
-To install these packages run `sudo apt install cmake make gcc`
+To install these packages on Ubuntu/Debian run `sudo apt install cmake make gcc libssl-dev`.
 
 ### Automatic Build
 I've made a script to do this automatically, in the main Lunix directory, type `./Build.sh` to build Lunix for first time. To rebuild type `./Build.sh --rebuild`.
