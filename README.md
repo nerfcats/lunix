@@ -1,6 +1,8 @@
 # Lunix
 Lunix is a very cool simulation hobby OS written in C++
 
+[![CMake on a single platform](https://github.com/noahdossan/Lunix/actions/workflows/cmake-single-platform.yml/badge.svg)](https://github.com/noahdossan/Lunix/actions/workflows/cmake-single-platform.yml)
+
 ## Screenshots
 ![Screenshot 1: Dog ASCII art](https://github.com/noahdossan/Lunix/blob/1fe0a5969c9768406357046517e46fa3fc49fccf/lulu-terminal.png)
 ![Screenshot 2: Overall terminal](https://github.com/noahdossan/Lunix/blob/1fe0a5969c9768406357046517e46fa3fc49fccf/lunix-terminal.png)
