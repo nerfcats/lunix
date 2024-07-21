@@ -1,1 +1,0 @@
-/usr/bin/c++ -g -rdynamic "CMakeFiles/lunix-bl.dir/main.cpp.o" -o lunix-bl  /usr/lib/x86_64-linux-gnu/libssl.so /usr/lib/x86_64-linux-gnu/libcrypto.so 

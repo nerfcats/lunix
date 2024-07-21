@@ -1,1 +1,0 @@
-/usr/bin/c++ -g -rdynamic CMakeFiles/lunix_bootloader.dir/main.cpp.o -o lunix_bootloader  /usr/lib/x86_64-linux-gnu/libssl.so /usr/lib/x86_64-linux-gnu/libcrypto.so 

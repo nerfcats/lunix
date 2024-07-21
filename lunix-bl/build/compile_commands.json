@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/home/noah/projects/lunix-bl/build",
-  "command": "/usr/bin/c++   -g -o CMakeFiles/lunix-bl.dir/main.cpp.o -c /home/noah/projects/lunix-bl/main.cpp",
-  "file": "/home/noah/projects/lunix-bl/main.cpp"
-}
-]

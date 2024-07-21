@@ -1,7 +1,0 @@
-/home/noah/projects/lunix-bl/build/CMakeFiles/lunix-bl.dir
-/home/noah/projects/lunix-bl/build/CMakeFiles/edit_cache.dir
-/home/noah/projects/lunix-bl/build/CMakeFiles/rebuild_cache.dir
-/home/noah/projects/lunix-bl/build/CMakeFiles/list_install_components.dir
-/home/noah/projects/lunix-bl/build/CMakeFiles/install.dir
-/home/noah/projects/lunix-bl/build/CMakeFiles/install/local.dir
-/home/noah/projects/lunix-bl/build/CMakeFiles/install/strip.dir
