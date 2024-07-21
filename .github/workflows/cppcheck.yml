@@ -10,15 +10,22 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Install Cppcheck
-      run: sudo apt-get install cppcheck
+    - name: Install Cppcheck and xmllint
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y cppcheck
+        sudo apt-get install -y libxml2-utils
 
     - name: Run Cppcheck
       run: |
         cppcheck --enable=all --inconclusive --xml --xml-version=2 . 2> cppcheck-report.xml
 
+    - name: Format Cppcheck XML
+      run: |
+        xmllint --format cppcheck-report.xml > cppcheck-report-formatted.xml
+
     - name: Upload Cppcheck report
       uses: actions/upload-artifact@v3
       with:
         name: cppcheck-report
-        path: cppcheck-report.xml
+        path: cppcheck-report-formatted.xml
