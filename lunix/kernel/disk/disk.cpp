@@ -1,5 +1,6 @@
 #include "disk.h"
 #include "../kernel/kernel.h"
+#include "../kernel/error_handler.h"
 #include <iostream>
 #include <fstream>
 #include <filesystem>
@@ -10,6 +11,7 @@ using namespace std::filesystem;
 namespace fs = std::filesystem;
 
 kernel Kernel;
+extern error_handler ErrHandler;
 
 disk::disk() {}
 
@@ -24,10 +26,10 @@ void disk::rootfs() {
             if (create_directory(path)) {
                 cout << "done\n";
             } else {
-                Kernel.panic("Failed to mount rootfs");
+                ErrHandler.panic("Failed to mount rootfs");
             }
         } else if (usr_input == "n" || usr_input == "N") {
-            Kernel.panic("Failed to mount rootfs");
+            ErrHandler.panic("Failed to mount rootfs");
         } else {
             disk::rootfs();
         }

@@ -6,6 +6,7 @@ project(lunix)
 add_executable(lunix
     main.cpp
     kernel/kernel/kernel.cpp
+    kernel/kernel/error_handler.cpp
     kernel/net/network.cpp
     kernel/disk/disk.cpp
     kernel/lsh.cpp

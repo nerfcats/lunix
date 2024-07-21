@@ -25,8 +25,7 @@ public:
     void haltrq(string reason); // External request to halt
     void crlrq(int rl); // External request to change runlevel
 
-    void panic(string reason);
-    void oops(string reason);
+
 
 
 private:
@@ -45,13 +44,6 @@ private:
      * Halts the kernel, exits, does not hang the system like panic.
      */
     void halt(string reason);
-
-    void print_stack_trace();
-    void setup_signal_handlers();
-    static void handle_signal(int signal);
-
-    void log_to_file(const string& log_message);
-    void dump_registers(stringstream& panic_info);
 
     // Check if there are root privileges at startup
     void check_sudo();
