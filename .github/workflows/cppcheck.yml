@@ -1,0 +1,24 @@
+name: Cppcheck
+
+on: [push, pull_request]
+
+jobs:
+  cppcheck:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Cppcheck
+      run: sudo apt-get install cppcheck
+
+    - name: Run Cppcheck
+      run: |
+        cppcheck --enable=all --inconclusive --xml --xml-version=2 . 2> cppcheck-report.xml
+
+    - name: Upload Cppcheck report
+      uses: actions/upload-artifact@v3
+      with:
+        name: cppcheck-report
+        path: cppcheck-report.xml
