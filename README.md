@@ -1,5 +1,10 @@
 # Lunix
 Lunix is a very cool simulation hobby OS written in C++
+
+## Screenshots
+![Screenshot 1: Dog ASCII art](https://github.com/noahdossan/Lunix/blob/1fe0a5969c9768406357046517e46fa3fc49fccf/lulu-terminal.png)
+![Screenshot 2: Overall terminal](https://github.com/noahdossan/Lunix/blob/1fe0a5969c9768406357046517e46fa3fc49fccf/lunix-terminal.png)
+
 ## Build Instructions
 To run Lunix you need to build both the kernel and the bootloader.
 
