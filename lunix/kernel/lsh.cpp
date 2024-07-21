@@ -147,9 +147,6 @@ int lsh::lshStart() {
                     std::cout << "Failed to unlink " << args << ". Error code " << Disk.funlink(args) << std::endl;
                 }
             }
-        } else if (command == "ud2") {
-            std::cout << "Causing system fault (illegal instruction)\n";
-            asm("ud2");
         } else if (command == "clear") {
             system("clear");
         } else if (command == "ver") {
