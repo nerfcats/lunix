@@ -39,10 +39,6 @@ void kernel::halt(string reason) {
     exit(0);
 }
 
-
-
-
-
 void kernel::haltrq(string reason) {
     kernel::halt(reason);
 }
@@ -76,9 +72,7 @@ std::string dexec(const char* cmd) {
     return result;
 }
 
-
 void kernel::start() {
-    //system("clear");
     std::cout << RESET;
 
     std::cout << "\nStarting the Lunar kernel...\n";
