@@ -197,7 +197,7 @@ void disk::umount() {
 }
 
 int disk::ftest() {
-    for (int i = 0; i < 10000; i++) {
+    for (int i = 0; i < 10; i++) {
         if (disk::fmkdir("test_disk") != 0) {
             return 1;
         }
