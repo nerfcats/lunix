@@ -4,7 +4,7 @@
 
 [![kernel build](https://github.com/noahdossan/Lunix/actions/workflows/kernel-build.yml/badge.svg)](https://github.com/noahdossan/Lunix/actions/workflows/kernel-build.yml)
 
-Lunix (Lulu's UNIX, Lulu being the name of my pup :3) is a very cool simulation hobby OS written in C++. It is a UNIX-clone and has several features such as file editing, kernel panics and "libraries" to handle stuff like Disk and Networking.
+Lunix (Lulu's UNIX, Lulu being the name of my pup :3) is a very cool simulation hobby OS written in C++. It is a UNIX-clone and has several features such as file editing, kernel panics and "libraries" to handle stuff like Disk and Networking. It can also run compiled binaries and bash scripts using `./program-name`.
 
 Please ⭐ the project if you think it's cool. It helps me stay motivated and continue to develop Lunix :)
 
