@@ -151,6 +151,11 @@ int lsh::lshStart() {
             system("clear");
         } else if (command == "ver") {
             cout << Kernel.ver << endl;
+        } else if (command.substr(0, 2) == "./") {
+            std::string executable = command.substr(0);
+            if (Disk.fopenbin(executable) != 0) {
+                std::cout << "Failed to execute '" << executable << "'." << std::endl;
+            }
         } else if (command == "lulu") {
             std::cout << R"(  /^ ^\
  / 0 0 \

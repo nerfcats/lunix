@@ -23,6 +23,8 @@ public:
     int fwrite(const char* buffer, std::streamsize size);
     int funlink(const std::string& filename);
 
+    int fopenbin(const std::string& binary);
+
     // Directory operations
     int fmkdir(const std::string& path);
     int frmdir(const std::string& path);

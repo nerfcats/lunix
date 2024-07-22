@@ -4,6 +4,10 @@
 #include <iostream>
 #include <fstream>
 #include <filesystem>
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <cstring>
 
 using namespace std;
 using namespace std::filesystem;
@@ -81,6 +85,34 @@ int disk::funlink(const std::string& filename) {
         return 0;
     } else {
         return 1;
+    }
+}
+
+int disk::fopenbin(const std::string& binary) {
+    pid_t pid = fork();  // Create a child process
+
+    if (pid < 0) {
+        // Fork failed
+        std::cerr << "Fork failed" << std::endl;
+        return -1;
+    } else if (pid == 0) {
+        // Child process
+        char *args[] = {const_cast<char*>(binary.c_str()), nullptr};
+        execvp(args[0], args);  // Replace the child process with the new binary
+
+        // If execvp returns, it must have failed
+        std::cerr << "Exec failed" << std::endl;
+        exit(EXIT_FAILURE);
+    } else {
+        // Parent process
+        int status;
+        waitpid(pid, &status, 0);  // Wait for the child process to finish
+
+        if (WIFEXITED(status)) {
+            return WEXITSTATUS(status);  // Return the exit status of the child process
+        } else {
+            return -1;  // Child process did not terminate normally
+        }
     }
 }
 
