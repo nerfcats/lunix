@@ -15,6 +15,7 @@ Please ⭐ the project if you think it's cool. It helps me stay motivated and co
   - [Automatic Build](#automatic-build)
   - [Manual Build](#manual-build)
 - [Running Lunix 🏃](#running-lunix)
+- [Updating Lunix 🆕](#updating-lunix)
 
 ## Project Direction
 I plan to make Lunix basically a full simulation of a UNIX/Linux terminal OS. I might (somehow) add a desktop enviroment.
@@ -68,3 +69,6 @@ Once you build the bootloader it will run a `post-build.sh` script. If it return
 In the main directory where you cloned Lunix, run the Run.sh script with `./Run.sh`
 
 To run Lunix manually, go to the bootloader directory (lunix-bl) and type `./lunix-bl`. If it returns a file missing error run `./lunix-bl -b` to rerun the post build script.
+
+## Updating Lunix
+To update Lunix, run `git pull`. Then run `./Build.sh --rebuild` to build any new updates.
