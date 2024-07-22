@@ -31,13 +31,15 @@ void lsh::printHelp() {
               << "  ls                - List files and directories\n"
               << "  shutdown          - Exit the shell\n"
               << "  exit              - Exit the shell\n"
-              << "  editor <file>     - Open simple text editor\n"
+              << "  editor <file>     - Open simple text editor. Use nano for more advanced features\n"
               << "  help              - Display this help\n"
               << "  rl                - Display current runlevel\n"
               << "  rm [-R] <file>    - Remove file or empty folder\n"
               << "                      Use -R to delete directory recursively\n"
               << "  mkdir <directory> - Make a directory in current working folder\n"
-              << "  ver               - Display OS and shell version\n";
+              << "  ver               - Display OS and shell version\n"
+              << "  nano              - Run nano, a text editor\n"
+              << "  chmod <args>      - Change permissions of a file.\n";
 }
 
 void lsh::changeDirectory(const std::string& path) {
@@ -123,6 +125,10 @@ int lsh::lshStart() {
             catFile(command.substr(4));
         } else if (command.substr(0, 7) == "editor ") {
             simpleEditor(command.substr(7));
+        } else if (command.substr(0, 4) == "nano") {
+            system(command.c_str());
+        } else if (command.substr(0, 5) == "chmod") {
+            system(command.c_str());
         } else if (command.substr(0, 2) == "rl") {
             std::cout << Kernel.runlevel << std::endl;
         } else if (command.substr(0, 3) == "rm ") {
