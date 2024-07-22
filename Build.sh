@@ -11,7 +11,7 @@ default_action() {
   cmake ..
   make -j$(nproc)
   ./post-build.sh
-  echo "Done. To run type ./lunix-bl -b to start and run post build script just to make sure"
+  echo "Done. To run check for build errors then run ./Run.sh"
 }
 
 # Function to perform the rebuild action
