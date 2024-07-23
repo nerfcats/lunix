@@ -6,8 +6,10 @@
 
 Thank you for considering to contribute to Lunix.
 
+**Working on your first Pull Request?** You can learn how from this *free* series [How to Contribute to an Open Source Project on GitHub](https://kcd.im/pull-request) 
+
 ## Code of Conduct
-Please read and follow our [Code of Conduct](CoC.md).
+Please read and follow our [Code of Conduct](/CODE_OF_CONDUCT.md).
 
 ## Getting Started
 ### Prerequisites
@@ -35,10 +37,10 @@ Please read and follow our [Code of Conduct](CoC.md).
 
 ## Style Guides
 ### Coding Standards
-Please follow [coding standard] for C++.
+Please follow [coding standard](http://micro-os-plus.github.io/develop/sutter-101/) for C++.
 
 ### Documentation Standards
-Use [Markdown syntax guide] for documentation.
+Use [Markdown syntax guide](MarkdownGuide.md) for documentation.
 
 ### Commit Messages
 Use the following format: `type(scope): message`. A valid commit message: `docs: add something to README.md`.
