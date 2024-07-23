@@ -77,10 +77,12 @@ In the main directory where you cloned Lunix, run the Run.sh script with `./Run.
 To run Lunix manually, go to the bootloader directory (lunix-bl) and type `./lunix-bl`. If it returns a file missing error run `./lunix-bl -b` to rerun the post build script.
 
 ## Documentation
-Working on that.
+The documentation is work in progress.
+
+[Documentation](/documentation)
 
 ## Contribution
-Contributions are very welcome :D! I am still new to this GitHub thing so I haven't made guidelines or stuff like that yet.
+Contributions are very welcome :D! Please read the [Contribution Guidelines](/documentation/Contributing.md) first.
 
 ## App Development
 For now Lunix can only run compiled binaries and bash scripts externally, and C++ kernel code internally. I might add a Lunix scripting language that it can parse and run.
