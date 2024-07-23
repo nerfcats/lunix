@@ -2,6 +2,7 @@
 
 # Lunix
 
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com) 
 [![kernel build](https://github.com/noahdossan/Lunix/actions/workflows/kernel-build.yml/badge.svg)](https://github.com/noahdossan/Lunix/actions/workflows/kernel-build.yml)
 
 Lunix (Lulu's UNIX, Lulu being the name of my pup :3) is a very cool simulation hobby OS written in C++ that runs in your terminal. It is a UNIX-clone and has several features such as file editing, kernel panics, "libraries" to handle stuff like Disk and Networking, error handling, sudo protection and some other stuff. It can also run compiled binaries and bash scripts using `./program-name`.
