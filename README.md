@@ -82,7 +82,7 @@ The documentation is work in progress.
 [Documentation](/documentation)
 
 ## Contribution
-Contributions are very welcome :D! Please read the [Contribution Guidelines](/documentation/Contributing.md) first.
+Contributions are very welcome :D! Please read the [Contribution Guidelines](/CONTRIBUTING.md) first.
 
 ## App Development
 For now Lunix can only run compiled binaries and bash scripts externally, and C++ kernel code internally. I might add a Lunix scripting language that it can parse and run.
