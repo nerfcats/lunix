@@ -1,8 +1,8 @@
 # Contributing to Lunix
 ## Introduction
 
-> [!NOTE]
-> This part of the documentation is a work in progress
+> [!WARNING]
+> This part of the documentation is outdated. Please go to [CONTRIBUTING.md](/CONTRIBUTING.md) instead.
 
 Thank you for considering to contribute to Lunix.
 
