@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+## [0.2.0] - 7-24-24
+
+### Added
+- User login management
+
 ## [0.1.0] - 07-23-24
 
 The first release of Lunix.

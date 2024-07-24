@@ -14,12 +14,14 @@
 #include "disk/disk.h"
 #include "kernel/kernel.h"
 #include "color.h"
+#include "security/userman.h"
 
 using namespace ANSIColors;
 
 namespace fs = std::filesystem;
 extern disk Disk;
 extern kernel Kernel;
+UserManager userManager;
 
 lsh::lsh() {}
 
@@ -80,6 +82,8 @@ void lsh::listFiles() {
 }
 
 int lsh::lshStart() {
+    userManager.initialize();  // Initialize user management and handle login
+
     Kernel.crlrq(4);
     std::string command;
     fs::path rootfsPath = fs::absolute("rootfs");  // Store the absolute path of rootfs
@@ -98,9 +102,10 @@ int lsh::lshStart() {
             promptPath = currentPath.string();
         }
 
-        std::cout << RED << "root" << RESET << "@" << CYAN << "lunix " << RESET << promptPath << " # ";
+        std::cout << (userManager.isRoot() ? RED + "root" + RESET : GREEN + userManager.getUsername() + RESET)
+                  << "@" << CYAN << "lunix " << RESET << promptPath << " # ";
+
         if (!std::getline(std::cin, command)) {
-            // Handle EOF (Ctrl-D)
             std::cout << std::endl;  // Print a newline to move to the next line after the prompt
             break;
         }
@@ -156,11 +161,20 @@ int lsh::lshStart() {
         } else if (command == "clear") {
             system("clear");
         } else if (command == "ver") {
-            cout << Kernel.ver << endl;
+            std::cout << Kernel.ver << std::endl;
         } else if (command.substr(0, 2) == "./") {
             std::string executable = command.substr(0);
             if (Disk.fopenbin(executable) != 0) {
                 std::cout << "Failed to execute '" << executable << "'." << std::endl;
+            }
+        } else if (command.substr(0, 6) == "passwd") {
+            if (userManager.isRoot()) {
+                std::string user, newPassword;
+                std::istringstream iss(command.substr(7));
+                iss >> user >> newPassword;
+                userManager.setPassword(user, newPassword);
+            } else {
+                std::cerr << "Only root can change other users' passwords.\n";
             }
         } else if (command == "lulu") {
             std::cout << R"(  /^ ^\
@@ -177,3 +191,4 @@ V__) ||
 
     return 0;
 }
+
