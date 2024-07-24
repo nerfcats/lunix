@@ -7,7 +7,7 @@ Hey, thanks for considering to contribute to Lunix! I'm looking for some contrib
 [Bugs](https://github.com/noahdossan/Lunix/issues) &bull;
 [Discussions](https://github.com/noahdossan/Lunix/discussions)
 
-[Build Instructions](https://github.com/jessesquires/.github/blob/main/CONTRIBUTING.md)
+[Build Instructions](https://github.com/noahdossan/Lunix?tab=readme-ov-file#build-instructions)
 
 ## :book: Code of Conduct
 
