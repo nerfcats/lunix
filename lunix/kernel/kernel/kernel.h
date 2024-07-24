@@ -10,6 +10,11 @@ public:
     kernel();
     int runlevel = 0;
     string ver = "Kernel version 0.2.0; Lunix shell 0.1.0";
+    /*
+     * 0.1: Andean
+     * 0.2: Bobcat
+     */
+    string codename = "Bobcat";
 
     // Start the kernel
     void start();
@@ -24,10 +29,6 @@ public:
 
     void haltrq(string reason); // External request to halt
     void crlrq(int rl); // External request to change runlevel
-
-
-
-
 private:
     /*
      * Runlevels
