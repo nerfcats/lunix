@@ -31,6 +31,7 @@ void disk::rootfs() {
             std::cout << "Creating rootfs...";
             if (fs::create_directory(path)) {
                 std::cout << "done\n";
+                disk::fchdir("rootfs");
             } else {
                 ErrHandler.panic("Failed to mount rootfs");
             }
@@ -42,6 +43,7 @@ void disk::rootfs() {
         }
     } else {
         std::cout << "done\n";
+        disk::fchdir("rootfs");
     }
 }
 

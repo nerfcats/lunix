@@ -83,7 +83,7 @@ int lsh::lshStart() {
     Kernel.crlrq(4);
     std::string command;
     fs::path rootfsPath = fs::absolute("rootfs");  // Store the absolute path of rootfs
-    Disk.fchdir("rootfs");
+
     std::cout << "\nWelcome to Lunix, a small simulation OS built on C++" << std::endl;
     std::cout << "lsh shell 0.1.0; type 'help' for commands\n\n";
     while (true) {
