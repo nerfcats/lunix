@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Navigate to the build directory of Lunix project
-cd ../../lunix/build
+# Navigate to the build directory of Lunix
+cd ../../lunix-sys/build
 
 # Copy the lunix binary to the bootloader build directory
 cp lunix ../../lunix-bl/build

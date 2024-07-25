@@ -2,7 +2,7 @@
 
 # Function to perform the default action
 default_action() {
-  cd lunix
+  cd lunix-sys
   mkdir build
   cd build
   cmake ..
@@ -16,7 +16,7 @@ default_action() {
 
 # Function to perform the rebuild action
 rebuild_action() {
-  cd lunix/build
+  cd lunix-sys/build
   make -j$(nproc)
   cd ../../lunix-bl/build
   make -j$(nproc)
