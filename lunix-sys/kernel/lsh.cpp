@@ -13,6 +13,7 @@
 
 #include "disk/disk.h"
 #include "kernel/kernel.h"
+#include "kernel/error_handler.h"
 #include "color.h"
 #include "security/userman.h"
 
@@ -21,6 +22,7 @@ using namespace ANSIColors;
 namespace fs = std::filesystem;
 extern disk Disk;
 extern kernel Kernel;
+extern error_handler ErrHandler;
 UserManager userManager;
 
 lsh::lsh() {}
@@ -166,6 +168,12 @@ int lsh::lshStart() {
             std::string executable = command.substr(0);
             if (Disk.fopenbin(executable) != 0) {
                 std::cout << "Failed to execute '" << executable << "'." << std::endl;
+            }
+        } else if (command == "panic") {
+            if (userManager.isRoot()) {
+                ErrHandler.panic("User initiated panic using 'panic' command");
+            } else {
+                cout << "Failed to run command: Permission denied\n";
             }
         } else if (command.substr(0, 6) == "passwd") {
             if (userManager.isRoot()) {

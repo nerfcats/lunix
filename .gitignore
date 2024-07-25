@@ -31,6 +31,6 @@
 *.out
 *.app
 
-/lunix/build
+/lunix-sys/build
 /lunix-bl/build
 !/lunix-bl/build/post-build.sh
