@@ -11,8 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `panic` command to panic the system for testing
 
 ### Changed
+- Changed the prompt to look better
 
 ### Fixed
+- Fixed the prompt to show the correct path (~ instead of full/path/to/rootfs)
 
 ### Removed
 
