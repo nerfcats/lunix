@@ -2,6 +2,8 @@
 // SPDX-FileCopyrightText: 2024 <copyright holder> <email>
 // SPDX-License-Identifier: GPL-3.0-or-later
 
+
+
 #include "lsh.h"
 
 #include <iostream>
@@ -99,15 +101,19 @@ void lsh::listFiles() {
  *
  * @return 0 upon successful completion.
  */
+
+
 int lsh::lshStart() {
     userManager.initialize();  // Initialize user management and handle login
 
     Kernel.crlrq(4);
     std::string command;
-    fs::path rootfsPath = fs::absolute("rootfs");  // Store the absolute path of rootfs
+    fs::path rootfsPath = fs::current_path();  // Get the current path after rootfs() has been called
 
     std::cout << "\nWelcome to Lunix, a small simulation OS built on C++" << std::endl;
     std::cout << "lsh shell 0.1.0; type 'help' for commands\n\n";
+    std::cout << "Current working directory: " << rootfsPath << std::endl;
+
     while (true) {
         fs::path currentPath = fs::current_path();
         std::string promptPath;
@@ -215,4 +221,3 @@ V__) ||
 
     return 0;
 }
-

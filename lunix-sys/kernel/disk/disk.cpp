@@ -22,28 +22,36 @@ disk::disk() {}
 void disk::rootfs() {
     std::string path = "rootfs";
     std::string usr_input;
+    fs::path rootfsPath = fs::absolute(path);
 
-    if (!fs::exists(path)) {
+    if (!fs::exists(rootfsPath)) {
         std::cout << "\nThe rootfs directory doesn't exist. Make new rootfs at " << fs::current_path() << "? (y/n): ";
-        std::getline(std::cin, usr_input); // Use getline to capture input
+        std::getline(std::cin, usr_input);
 
         if (usr_input == "y" || usr_input == "Y") {
             std::cout << "Creating rootfs...";
-            if (fs::create_directory(path)) {
+            if (fs::create_directory(rootfsPath)) {
                 std::cout << "done\n";
-                disk::fchdir("rootfs");
             } else {
-                ErrHandler.panic("Failed to mount rootfs");
+                ErrHandler.panic("Failed to create rootfs");
             }
         } else if (usr_input == "n" || usr_input == "N") {
             ErrHandler.panic("Failed to mount rootfs");
         } else {
             std::cout << "Invalid input. Please enter 'y' or 'n'.\n";
             disk::rootfs(); // Retry if invalid input
+            return;
         }
     } else {
-        std::cout << "done\n";
-        disk::fchdir("rootfs");
+        std::cout << "Rootfs exists.\n";
+    }
+
+    std::cout << "Changing to rootfs directory...\n";
+    try {
+        fs::current_path(rootfsPath);
+        std::cout << "Current working directory: " << fs::current_path() << std::endl;
+    } catch (const fs::filesystem_error& e) {
+        ErrHandler.panic("Failed to change to rootfs directory: " + std::string(e.what()));
     }
 }
 
