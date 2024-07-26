@@ -177,10 +177,18 @@ int disk::frmdir_r(const std::string& path) {
 }
 
 int disk::fchdir(const std::string& path) {
-    if (exists(path) && is_directory(path)) {
-        current_path(path);
-        return 0;
-    } else {
+    try {
+        if (exists(path) && is_directory(path)) {
+            current_path(path);
+            return 0;
+        } else {
+            return 1;
+        }
+    } catch (const fs::filesystem_error& e) {
+        cerr << "Filesystem error: " << e.what() << endl;
+        return 1;
+    } catch (const std::exception& e) {
+        cerr << "Error: " << e.what() << endl;
         return 1;
     }
 }

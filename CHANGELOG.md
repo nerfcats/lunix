@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fixed the prompt to show the correct path (~ instead of full/path/to/rootfs)
+- Made the disk library catch directory exceptions
 
 ### Removed
 
