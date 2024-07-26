@@ -27,22 +27,28 @@ UserManager userManager;
 lsh::lsh() {}
 
 void lsh::printHelp() {
-    std::cout << "Commands:\n"
-              << "  cd <directory>    - Change directory\n"
-              << "  pwd               - Print working directory\n"
-              << "  cat <file>        - Print file content\n"
-              << "  ls                - List files and directories\n"
-              << "  shutdown          - Exit the shell\n"
-              << "  exit              - Exit the shell\n"
-              << "  editor <file>     - Open simple text editor. Use nano for more advanced features\n"
-              << "  help              - Display this help\n"
-              << "  rl                - Display current runlevel\n"
-              << "  rm [-R] <file>    - Remove file or empty folder\n"
-              << "                      Use -R to delete directory recursively\n"
-              << "  mkdir <directory> - Make a directory in current working folder\n"
-              << "  ver               - Display OS and shell version\n"
-              << "  nano              - Run nano, a text editor\n"
-              << "  chmod <args>      - Change permissions of a file.\n";
+    const std::vector<std::pair<std::string, std::string>> commands = {
+        {"cat <file>", "Display the contents of a file"},
+        {"cd <directory>", "Change the current working directory"},
+        {"chmod <args>", "Change the permissions of a file or directory"},
+        {"editor <file>", "Open a simple text editor (use 'nano' for more advanced features)"},
+        {"exit", "Exit the shell"},
+        {"help", "Display this help information"},
+        {"ls", "List files and directories in the current directory"},
+        {"mkdir <directory>", "Create a new directory in the current working folder"},
+        {"nano", "Run the Nano text editor"},
+        {"pwd", "Print the current working directory"},
+        {"rl", "Display the current system runlevel"},
+        {"rm [-R] <file/directory>", "Remove a file or empty directory\n"
+                                     "                              Use -R to delete a directory and its contents recursively"},
+        {"shutdown", "Shut down the system and exit the shell"},
+        {"ver", "Display the OS and shell version information"}
+    };
+
+    std::cout << "\n" << "Available Commands:" << "\n\n";
+    for (const auto& [cmd, desc] : commands) {
+        std::cout << "  " << cmd << "\n    " << desc << "\n\n";
+    }
 }
 
 void lsh::changeDirectory(const std::string& path) {
