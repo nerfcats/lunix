@@ -1,7 +1,6 @@
 #include "error_handler.h"
 #include <iostream>
 #include <fstream>
-#include <filesystem>
 #include <thread>
 #include <chrono>
 #include <unistd.h> // for geteuid
@@ -10,15 +9,9 @@
 #include <sstream> // for std::stringstream
 #include <cstdlib>
 #include <cstdio>
-#include <memory>
-#include <stdexcept>
 #include <string>
-#include <array>
 #include "kernel.h"
 #include "../color.h"
-#include "../net/network.h"
-#include "../disk/disk.h"
-#include "../lsh.h"
 
 using namespace std;
 using namespace std::filesystem;
