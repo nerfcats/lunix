@@ -47,7 +47,6 @@ void error_handler::panic(string reason) {
     // Add more debugging information
     panic_info << "System has panicked...\n";
     panic_info << "OS Version: " << Kernel.ver << endl; // Replace with actual version
-    panic_info << "CPU Architecture: " << "x86_64" << endl; // Replace with actual
 
     panic_info << "\nend Kernel panic: " << reason << RESET << endl;
 
