@@ -1,14 +1,3 @@
-/**
- * @file README.md
- * @brief Documentation for the Lunix project.
- *
- * This file provides an overview of the Lunix project, including its features, build instructions, and usage.
- * It also includes information on project direction, screenshots, and contribution guidelines.
- *
- * @see https://github.com/noahdossan/Lunix
- */
-
-
 <img src="https://github.com/noahdossan/Lunix/blob/59b9e7d90a7bdcbc3a6119e00a31a14058005577/images/logo.png" alt="Lunix logo" title="Lunix" align="right" height="60" />
 
 # Lunix
