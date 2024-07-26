@@ -82,6 +82,17 @@ void lsh::listFiles() {
     }
 }
 
+/**
+ * Starts the Lunix shell.
+ *
+ * This function initializes user management and handles the login process.
+ * It displays a welcome message and a prompt for user input.
+ * The function continuously reads user commands and executes them until the user enters "shutdown" or "exit".
+ * Supported commands include changing directories, listing files, creating directories, viewing file contents,
+ * editing files, changing permissions, deleting files and directories, and more.
+ *
+ * @return 0 upon successful completion.
+ */
 int lsh::lshStart() {
     userManager.initialize();  // Initialize user management and handle login
 
