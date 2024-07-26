@@ -67,6 +67,12 @@ std::string dexec(const char* cmd) {
     return result;
 }
 
+/**
+ * Starts the Lunar kernel.
+ * This function performs various initialization tasks and tests the network and disk reliability.
+ * It also prints information about connected USB devices, PCI devices, and block devices.
+ * Finally, it starts the Lunix OS and enters the command line shell.
+ */
 void kernel::start() {
     std::cout << RESET;
 
