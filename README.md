@@ -1,3 +1,14 @@
+/**
+ * @file README.md
+ * @brief Documentation for the Lunix project.
+ *
+ * This file provides an overview of the Lunix project, including its features, build instructions, and usage.
+ * It also includes information on project direction, screenshots, and contribution guidelines.
+ *
+ * @see https://github.com/noahdossan/Lunix
+ */
+
+
 <img src="https://github.com/noahdossan/Lunix/blob/59b9e7d90a7bdcbc3a6119e00a31a14058005577/images/logo.png" alt="Lunix logo" title="Lunix" align="right" height="60" />
 
 # Lunix
@@ -5,9 +16,17 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com) 
 [![kernel build](https://github.com/noahdossan/Lunix/actions/workflows/kernel-build.yml/badge.svg)](https://github.com/noahdossan/Lunix/actions/workflows/kernel-build.yml)
 
-Lunix (Lulu's UNIX, Lulu being the name of my pup :3) is a very cool simulation hobby OS written in C++ that runs in your terminal. It is a UNIX-clone and has several features such as file editing, kernel panics, "libraries" to handle stuff like Disk and Networking, error handling, sudo protection and some other stuff. It can also run compiled binaries and bash scripts using `./program-name`.
+Lunix (Lulu's UNIX, named after my pup Lulu) is a hobby operating system written in C++ that simulates a UNIX-like environment in your terminal. It features:
 
-Please ⭐ the project if you think it's cool. It helps me stay motivated and continue to develop Lunix :).
+- **File Editing**: Create and modify files directly within Lunix.
+- **Kernel Panics**: Kernel panic events that trigger on actual signals such as SIGABRT.
+- **Libraries**: Built-in "libraries" for handling disk operations, networking, and more.
+- **Error Handling**: Robust error handling mechanisms.
+- **Multiple Users**: Add other users without root perms. Passwords are stored as a sha256 hash.
+- **Executable Support**: Run compiled binaries and bash scripts using `./program-name`.
+- and much more!
+
+If you find Lunix interesting, please ⭐ the project. Your support keeps me motivated to continue developing and improving Lunix!
 
 ## Table of Contents
 - [Project Direction 🚀](#project-direction)
@@ -22,64 +41,116 @@ Please ⭐ the project if you think it's cool. It helps me stay motivated and co
 - [App Development 💾](#app-development)
 
 ## Project Direction
-I plan to make Lunix basically a full simulation of a UNIX/Linux terminal OS. I might (somehow) add a desktop enviroment.
-Also, when the project starts to mature a little, I might start using Releases so no building is needed.
+Lunix aims to be a comprehensive simulation of a UNIX/Linux terminal operating system. The project's primary focus is on adding new features and commands to enhance the user experience. Future plans include the development of custom scripts specifically for Lunix, providing users with even more functionality. The current development efforts are concentrated on expanding the feature set and improving the overall performance and stability of Lunix.
 
 ## Screenshot
 
 ![Screenshot 1: Demo GIF of terminal](https://github.com/noahdossan/Lunix/blob/9752eb99282886595c5743513ea651e4653bfe66/images/demo.gif)
 
 ## Build Instructions
-To run Lunix you need to build both the kernel and the bootloader.
+
+To run Lunix, you need to build both the kernel and the bootloader.
 
 > [!IMPORTANT]
-> Lunix can't be built on Windows, as it uses UNIX only libraries. Please use WSL or a Linux VM.
+> Lunix can't be built on Windows, as it uses UNIX-only libraries. Please use WSL or a Linux VM.
 
 ### Requirements
-To build Lunix, you need:
+
+To build Lunix, you need the following packages installed:
+
 - `cmake`
 - `make`
 - `gcc`
 - `g++`
 - `libssl-dev/openssl-devel`
 
-To install these packages on Ubuntu/Debian run `sudo apt install cmake make gcc g++ libssl-dev`.
-To install these packages on Fedora run `sudo dnf install cmake make gcc g++ openssl-devel`.
+To install these packages on Ubuntu/Debian, run the following command:
+```
+sudo apt install cmake make gcc g++ libssl-dev
+```
 
-Run `git clone https://github.com/noahdossan/lunix.git` and `cd lunix`.
+To install these packages on Fedora, run the following command:
+```
+sudo dnf install cmake make gcc g++ openssl-devel
+```
+
+After installing the required packages, clone the Lunix repository and navigate to the cloned directory:
+```
+git clone https://github.com/noahdossan/lunix.git
+cd lunix
+```
 
 ### Automatic Build
-In the main Lunix directory, type `./Build.sh` to build Lunix if you haven't built it yet. To rebuild type `./Build.sh --rebuild`.
+
+In the main Lunix directory, run the following command to build Lunix:
+```
+./Build.sh
+```
+If you have already built Lunix and want to rebuild it, use the `--rebuild` flag:
+```
+./Build.sh --rebuild
+```
 
 ### Manual Build
-You have to build the kernel and bootloader in order, since the bootloaders post build script needs the kernel to be built.
 
-To build the kernel:
+To build the kernel, follow these steps:
+
+1. Navigate to the Lunix directory:
 ```
 cd lunix
+```
+
+2. Create a build directory:
+```
 mkdir build
 cd build
+```
+
+3. Generate the build files using CMake:
+```
 cmake ..
+```
+
+4. Build the kernel using `make`:
+```
 make -j$(nproc)
 ```
-To build the bootloader:
+
+To build the bootloader, follow these steps:
+
+1. Navigate to the bootloader directory:
 ```
-cd ../../lunix-bl # Assuming you were in the lunix directory
+cd ../../lunix-bl
 cd build
+```
+
+2. Generate the build files using CMake:
+```
 cmake ..
+```
+
+3. Build the bootloader using `make`:
+```
 make -j$(nproc)
 ```
-Once you build the bootloader it will run a `post-build.sh` script. If it returns an error make sure you built the lunix kernel properly.
+
+Once you have built the bootloader, it will run a `post-build.sh` script. If you encounter any errors, make sure you have built the Lunix kernel properly.
 
 ## Running Lunix
-In the main directory where you cloned Lunix, run the Run.sh script with `./Run.sh`
 
-To run Lunix manually, go to the bootloader directory (lunix-bl) and type `./lunix-bl`. If it returns a file missing error run `./lunix-bl -b` to rerun the post build script.
+To run Lunix, follow these steps:
+
+1. In the main directory where you cloned Lunix, run the `Run.sh` script by executing `./Run.sh`.
+
+2. If you prefer to run Lunix manually, navigate to the bootloader directory (`lunix-bl`) and execute `./lunix-bl`. If you encounter a file missing error, you can rerun the post build script by executing `./lunix-bl -b`.
+
 
 ## Documentation
-The documentation is work in progress. Contributions to the docs are welcome
 
-[Read the Documentation here.](/documentation)
+The documentation for Lunix is currently a work in progress. We welcome contributions to help improve and expand the documentation.
+
+To access the documentation, please visit the [Documentation](/documentation) page.
+
 
 ## Contribution
 Contributors are very welcome to Lunix :D! Please read the [Contribution Guidelines](/CONTRIBUTING.md) first.
