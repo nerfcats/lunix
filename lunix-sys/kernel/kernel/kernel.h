@@ -11,10 +11,9 @@ public:
     int runlevel = 0;
     string ver = "Kernel version 0.2.0; Lunix shell 0.1.0";
     /*
-     * 0.1: Andean
-     * 0.2: Bobcat
+     * 0.x: Nova
      */
-    string codename = "Bobcat";
+    string codename = "Nova";
 
     // Start the kernel
     void start();

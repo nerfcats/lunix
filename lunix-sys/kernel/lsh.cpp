@@ -185,7 +185,7 @@ int lsh::lshStart() {
         } else if (command == "clear") {
             system("clear");
         } else if (command == "ver") {
-            std::cout << Kernel.ver << std::endl;
+            std::cout << Kernel.ver << std::endl << "Codename " << Kernel.codename << std::endl;
         } else if (command.substr(0, 2) == "./") {
             std::string executable = command.substr(0);
             if (Disk.fopenbin(executable) != 0) {
