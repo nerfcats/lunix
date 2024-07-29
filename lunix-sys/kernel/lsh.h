@@ -23,7 +23,7 @@ private:
     void printWorkingDirectory();
     void catFile(const std::string& filename);
     void simpleEditor(const std::string& filename);
-    void listFiles();
+    void listFiles(const std::string& path = ".");
 };
 
 #endif // LSH_H

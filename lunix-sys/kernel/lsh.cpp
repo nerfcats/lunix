@@ -84,9 +84,19 @@ void lsh::simpleEditor(const std::string& filename) {
     outFile.close();
 }
 
-void lsh::listFiles() {
-    for (const auto& entry : fs::directory_iterator(fs::current_path())) {
-        std::cout << entry.path().filename().string() << std::endl;
+void lsh::listFiles(const std::string& path) {
+    try {
+        fs::path dirPath = fs::absolute(path);
+        for (const auto& entry : fs::directory_iterator(dirPath)) {
+            std::string name = entry.path().filename().string();
+            if (fs::is_directory(entry.status())) {
+                std::cout << BOLD_BLUE << name << "/" << RESET << std::endl;
+            } else {
+                std::cout << name << std::endl;
+            }
+        }
+    } catch (const fs::filesystem_error& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
     }
 }
 
@@ -146,8 +156,12 @@ int lsh::lshStart() {
             }
         } else if (command == "pwd") {
             std::cout << Disk.fcwd() << std::endl;
-        } else if (command == "ls") {
-            listFiles();
+        } else if (command.substr(0, 2) == "ls") {
+            std::string path = ".";
+            if (command.length() > 3) {
+                path = command.substr(3);
+            }
+            listFiles(path);
         } else if (command.substr(0, 6) == "mkdir ") {
             Disk.fmkdir(command.substr(6));
         } else if (command.substr(0, 4) == "cat ") {
