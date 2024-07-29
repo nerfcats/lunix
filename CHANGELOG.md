@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - `panic` command to panic the system for testing
 - Added a codename to the kernel (Nova)
+- Added build date
 
 ### Changed
 - Changed the prompt to look better
