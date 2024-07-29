@@ -149,7 +149,7 @@ void error_handler::handle_signal(int signal) {
 }
 
 void error_handler::log_to_file(const string& log_message) {
-    ofstream log_file("kernel_panic.log", ios_base::app);
+    ofstream log_file("kernel.log", ios_base::app);
     if (log_file.is_open()) {
         log_file << log_message;
         log_file.close();
