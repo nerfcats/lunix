@@ -86,7 +86,6 @@ int main(int argc, char* argv[]) {
         }
     }
 
-    system("clear");
     std::cout << BOLD_WHITE << "LUNIX BOOTLOADER (" << bMode << ")" << RESET << "\n\n";
 
     if (runPostBuild) {
