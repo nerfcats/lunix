@@ -2,6 +2,7 @@
 #include "userman.h"
 
 #include <termios.h>
+#include <thread>
 #include <unistd.h>
 #include <iostream>
 #include <string>
@@ -42,10 +43,25 @@ void UserManager::initialize() {
     if (!passwordFileExists()) {
         createPasswordFile();
     }
-    if (!login()) {
-        std::cerr << "Failed to login. Exiting...\n";
-        exit(1);
+    
+    int attempts = 0;
+    const int maxAttempts = 3;
+    
+    while (attempts < maxAttempts) {
+        if (login()) {
+            return;
+        }
+        
+        attempts++;
+        
+        if (attempts < maxAttempts) {
+            std::cerr << "Login failed. Attempts remaining: " << (maxAttempts - attempts) << std::endl;
+            std::this_thread::sleep_for(std::chrono::seconds(3));
+        }
     }
+    
+    std::cerr << "Maximum login attempts exceeded. Shutting down...\n";
+    exit(1);
 }
 
 bool UserManager::login() {
