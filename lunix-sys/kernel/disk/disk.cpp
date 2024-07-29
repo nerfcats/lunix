@@ -1,6 +1,7 @@
 #include "disk.h"
 #include "../kernel/kernel.h"
 #include "../kernel/error_handler.h"
+#include "../security/userman.h"
 #include <iostream>
 #include <fstream>
 #include <filesystem>
@@ -8,7 +9,8 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <cstring>
-
+#include <algorithm>
+#include <vector>
 using namespace std;
 using namespace std::filesystem;
 
@@ -16,6 +18,7 @@ namespace fs = std::filesystem;
 
 kernel Kernel;
 extern error_handler ErrHandler;
+extern UserManager userManager;
 
 disk::disk() {}
 
@@ -91,6 +94,14 @@ int disk::fwrite(const char* buffer, std::streamsize size) {
 }
 
 int disk::funlink(const std::string& filename) {
+    // Check if the file is in the protected files list
+    if (std::find(protectedFiles.begin(), protectedFiles.end(), filename) != protectedFiles.end()) {
+        // If the file is protected, check if the user is root
+        if (!userManager.isRoot()) {
+            std::cerr << "Permission denied: " << filename << " is a protected file." << std::endl;
+            return -1;  // Return -1 to indicate an error
+        }
+    }
     if (remove(filename.c_str()) == 0) {
         return 0;
     } else {

@@ -11,6 +11,7 @@ class disk
 {
 public:
     disk();
+    const std::vector<std::string> protectedFiles = {".passwd"};
 
     // Configure root filesystem folder
     void rootfs();
