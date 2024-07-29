@@ -68,7 +68,7 @@ bool UserManager::login() {
 }
 
 void UserManager::setPassword(const std::string& username, const std::string& password) {
-    std::ofstream passwordFile("passwords.txt", std::ios::app);
+    std::ofstream passwordFile(".passwd", std::ios::app);
     if (passwordFile.is_open()) {
         passwordFile << username << "." << hashPassword(password) << "\n";
         passwordFile.close();
@@ -86,7 +86,7 @@ bool UserManager::isRoot() const {
 }
 
 void UserManager::createPasswordFile() {
-    std::ofstream passwordFile("passwords.txt");
+    std::ofstream passwordFile(".passwd");
     if (passwordFile.is_open()) {
         std::string rootPassword;
         std::cout << "No password file found. Create a password for root: ";
@@ -99,7 +99,7 @@ void UserManager::createPasswordFile() {
 }
 
 bool UserManager::authenticate(const std::string& username, const std::string& password) {
-    std::ifstream passwordFile("passwords.txt");
+    std::ifstream passwordFile(".passwd");
     std::string line;
 
     if (passwordFile.is_open()) {
@@ -135,5 +135,5 @@ std::string UserManager::hashPassword(const std::string& password) {
 }
 
 bool UserManager::passwordFileExists() const {
-    return fs::exists("passwords.txt");
+    return fs::exists(".passwd");
 }
