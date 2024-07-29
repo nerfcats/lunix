@@ -200,6 +200,14 @@ int lsh::lshStart() {
             system("clear");
         } else if (command == "ver") {
             std::cout << Kernel.ver << std::endl << "Codename " << Kernel.codename << std::endl;
+            std::ifstream buildDateFile("../.builddate");
+            if (buildDateFile) {
+                std::string buildDate;
+                std::getline(buildDateFile, buildDate);
+                std::cout << "Built on: " << buildDate << std::endl;
+            } else {
+                std::cerr << "Failed to open .builddate file." << std::endl;
+            }
         } else if (command.substr(0, 2) == "./") {
             std::string executable = command.substr(0);
             if (Disk.fopenbin(executable) != 0) {
