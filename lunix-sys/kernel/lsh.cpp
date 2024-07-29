@@ -137,7 +137,7 @@ int lsh::lshStart() {
         }
 
         std::cout << (userManager.isRoot() ? BOLD_RED + "root" + RESET : BOLD_GREEN + userManager.getUsername() + RESET)
-                  << "@" << BOLD_CYAN << "lunix " << RESET << promptPath << (userManager.isRoot() ? " # " : " $ ");
+                  << "@" << BOLD_CYAN << "lunix " << RESET << promptPath << (userManager.isRoot() ? " # " : " % ");
 
         if (!std::getline(std::cin, command)) {
             std::cout << std::endl;  // Print a newline to move to the next line after the prompt

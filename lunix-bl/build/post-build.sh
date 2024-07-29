@@ -14,10 +14,4 @@ mv lunix kernel.bin
 # Generate the SHA-256 hash of kernel.bin and save it to kernel.bin.sha256
 sha256sum kernel.bin > kernel.bin.sha256
 
-# Get the current date and time
-build_date=$(date +"%Y-%m-%d %H:%M:%S")
-
-# Write the build date to .builddate file
-echo "$build_date" > .builddate
-
 echo "Post build script finished"

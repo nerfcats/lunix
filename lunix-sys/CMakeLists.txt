@@ -21,3 +21,8 @@ target_link_libraries(lunix OpenSSL::SSL OpenSSL::Crypto stdc++fs)
 
 # Specify installation target
 install(TARGETS lunix RUNTIME DESTINATION bin)
+
+# Run build-date-set.sh after compilation
+add_custom_command(TARGET lunix POST_BUILD
+    COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/build-date-set.sh
+)
