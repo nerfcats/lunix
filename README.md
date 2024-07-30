@@ -32,7 +32,7 @@ Lunix aims to be a comprehensive simulation of a UNIX/Linux terminal operating s
 
 ## Screenshot
 
-![Screenshot 1: Demo GIF of terminal](https://github.com/noahdossan/Lunix/blob/9752eb99282886595c5743513ea651e4653bfe66/images/demo.gif)
+![Screenshot 1: Demo GIF of terminal](https://github.com/noahdossan/lunix/blob/main/images/demo2.gif)
 
 ## Build Instructions
 
