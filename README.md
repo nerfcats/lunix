@@ -1,18 +1,16 @@
-<img src="https://github.com/noahdossan/lunix/blob/main/images/lunix-logo-lowres.png" alt="Lunix logo" title="Lunix" align="right" height="60" />
-
-# Lunix
+![Lunix Logo](https://github.com/noahdossan/lunix/blob/main/images/lunix-logo-lowres.png)
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com) 
 [![kernel build](https://github.com/noahdossan/Lunix/actions/workflows/kernel-build.yml/badge.svg)](https://github.com/noahdossan/Lunix/actions/workflows/kernel-build.yml)
 
-Lunix (Lulu's UNIX, named after my pup Lulu) is a hobby operating system written in C++ that simulates a UNIX-like environment in your terminal. It features:
+Lunix (Lulu's UNIX, named after my pupper Lulu) is a hobby operating system written in C++ that simulates a UNIX-like environment in your terminal. It features:
 
 - **File Editing**: Create and modify files directly within Lunix.
-- **Kernel Panics**: Kernel panic events that trigger on actual signals such as SIGABRT.
 - **Libraries**: Built-in "libraries" for handling disk operations, networking, and more.
 - **Error Handling**: Robust error handling mechanisms.
 - **Multiple Users**: Add other users without root perms. Passwords are stored as a sha256 hash.
 - **Executable Support**: Run compiled binaries and bash scripts using `./program-name`.
+- **Kernel Panics**: Kernel panic events that trigger on actual signals such as SIGABRT.
 - and much more!
 
 If you find Lunix interesting, please ⭐ the project. Your support keeps me motivated to continue developing and improving Lunix!
