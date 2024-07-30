@@ -8,6 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+
+### Changed
+
+### Fixed
+
+### Removed
+
+## [0.3.0] - 07-30-24
+
+### Added
 - `panic` command to panic the system for testing
 - Added a codename to the kernel (Nova)
 - Added build date
@@ -24,9 +34,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed the prompt to show the correct path (~ instead of full/path/to/rootfs)
 - Made the disk library catch directory exceptions
 
-### Removed
-
-## [0.2.0] - 7-24-24
+## [0.2.0] - 07-24-24
 
 ### Added
 - User login management
