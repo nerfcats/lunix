@@ -12,6 +12,7 @@
 #include <fstream>
 #include <cstdlib>
 
+
 #include "disk/disk.h"
 #include "kernel/kernel.h"
 #include "kernel/error_handler.h"
@@ -30,19 +31,19 @@ lsh::lsh() {}
 
 void lsh::printHelp() {
     const std::vector<std::pair<std::string, std::string>> commands = {
-        {"cat <file>", "Display the contents of a file"},
-        {"cd <directory>", "Change the current working directory"},
-        {"chmod <args>", "Change the permissions of a file or directory"},
-        {"editor <file>", "Open a simple text editor (use 'nano' for more advanced features)"},
+        {"cat", "Display the contents of a file"},
+        {"cd", "Change the current working directory"},
+        {"chmod", "Change the permissions of a file or directory"},
+        {"editor", "Open a simple text editor (use 'nano' for more advanced features)"},
         {"exit", "Exit the shell"},
         {"help", "Display this help information"},
         {"ls", "List files and directories in the current directory"},
-        {"mkdir <directory>", "Create a new directory in the current working folder"},
+        {"mkdir", "Create a new directory in the current working folder"},
         {"nano", "Run the Nano text editor"},
-        {"passwd <username> <new_password>", "Change the password for a user (root only)"},
+        {"passwd", "Change the password for a user (root only)"},
         {"pwd", "Print the current working directory"},
         {"rl", "Display the current system runlevel"},
-        {"rm [-R] <file/directory>", "Remove a file or empty directory\n"
+        {"rm", "Remove a file or empty directory\n"
              "  Use -R to delete a directory and its contents recursively"},
         {"shutdown", "Shut down the system and exit the shell"},
         {"ver", "Display the OS and shell version information"}
@@ -55,7 +56,7 @@ void lsh::printHelp() {
         if (i < commands.size() - 1) {
             std::cout << ", ";
         }
-        if ((i + 1) % 5 == 0) {
+        if ((i + 1) % 10 == 0) {
             std::cout << "\n          ";
         }
     }
