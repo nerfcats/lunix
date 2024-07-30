@@ -18,6 +18,8 @@
 #include "kernel/error_handler.h"
 #include "color.h"
 #include "security/userman.h"
+#include "net/lisp/server/server.h"
+#include "net/lisp/client/client.h"
 
 using namespace ANSIColors;
 
@@ -26,6 +28,9 @@ extern disk Disk;
 extern kernel Kernel;
 extern error_handler ErrHandler;
 UserManager userManager;
+
+Server server;
+Client client;
 
 lsh::lsh() {}
 
@@ -280,6 +285,12 @@ int lsh::lshStart() {
             } else {
                 std::cerr << "Only root can change other users' passwords.\n";
             }
+        } else if (command == "server start") {
+            server.start();
+        } else if (command == "server stop") {
+            server.stop();
+        } else if (command == "client ping") {
+            client.pingServer("127.0.0.1", 6942);
         } else if (command == "lulu") {
             std::cout << R"(  /^ ^\
  / 0 0 \

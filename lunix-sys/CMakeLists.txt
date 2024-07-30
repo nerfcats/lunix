@@ -14,6 +14,8 @@ add_executable(lunix
     kernel/disk/disk.cpp
     kernel/lsh.cpp
     kernel/security/userman.cpp
+    kernel/net/lisp/server/server.cpp
+    kernel/net/lisp/client/client.cpp
 )
 
 # Link OpenSSL and filesystem libraries
