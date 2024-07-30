@@ -100,11 +100,18 @@ void lsh::printWorkingDirectory() {
 }
 
 void lsh::catFile(const std::string& filename) {
-    std::ifstream file(filename);
-    if (file) {
-        std::cout << file.rdbuf();
-    } else {
-        std::cerr << "No such file: " << filename << std::endl;
+    try {
+        std::ifstream file(filename);
+        if (file) {
+            if (fs::is_directory(filename)) {
+                throw std::runtime_error("Cannot cat a directory");
+            }
+            std::cout << file.rdbuf();
+        } else {
+            std::cerr << "No such file: " << filename << std::endl;
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
     }
 }
 
@@ -264,7 +271,11 @@ int lsh::lshStart() {
                 std::string user, newPassword;
                 std::istringstream iss(command.substr(7));
                 iss >> user >> newPassword;
-                userManager.setPassword(user, newPassword);
+                if (user.empty() || newPassword.empty()) {
+                    std::cout << "Usage: passwd <username> <new_password>\n";
+                } else {
+                    userManager.setPassword(user, newPassword);
+                }
             } else {
                 std::cerr << "Only root can change other users' passwords.\n";
             }
