@@ -39,18 +39,56 @@ void lsh::printHelp() {
         {"ls", "List files and directories in the current directory"},
         {"mkdir <directory>", "Create a new directory in the current working folder"},
         {"nano", "Run the Nano text editor"},
+        {"passwd <username> <new_password>", "Change the password for a user (root only)"},
         {"pwd", "Print the current working directory"},
         {"rl", "Display the current system runlevel"},
         {"rm [-R] <file/directory>", "Remove a file or empty directory\n"
-                                     "                              Use -R to delete a directory and its contents recursively"},
+             "  Use -R to delete a directory and its contents recursively"},
         {"shutdown", "Shut down the system and exit the shell"},
         {"ver", "Display the OS and shell version information"}
     };
 
-    std::cout << "\n" << "Available Commands:" << "\n\n";
-    for (const auto& [cmd, desc] : commands) {
-        std::cout << "  " << cmd << "\n    " << desc << "\n\n";
+    std::cout << "\n" << "Available commands:" << "\n\n";
+    std::cout << "built-in: {";
+    for (size_t i = 0; i < commands.size(); ++i) {
+        std::cout << commands[i].first;
+        if (i < commands.size() - 1) {
+            std::cout << ", ";
+        }
+        if ((i + 1) % 5 == 0) {
+            std::cout << "\n          ";
+        }
     }
+    std::cout << "}\n";
+}
+
+void lsh::man(const std::string& command) {
+    const std::vector<std::pair<std::string, std::string>> commands = {
+        {"cat <file>", "Display the contents of a file"},
+        {"cd <directory>", "Change the current working directory"},
+        {"chmod <args>", "Change the permissions of a file or directory"},
+        {"editor <file>", "Open a simple text editor (use 'nano' for more advanced features)"},
+        {"exit", "Exit the shell"},
+        {"help", "Display this help information"},
+        {"ls", "List files and directories in the current directory"},
+        {"mkdir <directory>", "Create a new directory in the current working folder"},
+        {"nano", "Run the Nano text editor"},
+        {"passwd <username> <new_password>", "Change the password for a user (root only)"},
+        {"pwd", "Print the current working directory"},
+        {"rl", "Display the current system runlevel"},
+        {"rm [-R] <file/directory>", "Remove a file or empty directory\n"
+             "  Use -R to delete a directory and its contents recursively"},
+        {"shutdown", "Shut down the system and exit the shell"},
+        {"ver", "Display the OS and shell version information"}
+    };
+
+    for (const auto& [cmd, desc] : commands) {
+        if (cmd.find(command) != std::string::npos) {
+            std::cout << cmd << "\n" << desc << "\n";
+            return;
+        }
+    }
+    std::cout << "No manual entry for " << command << "\n";
 }
 
 void lsh::changeDirectory(const std::string& path) {
@@ -150,6 +188,8 @@ int lsh::lshStart() {
 
         } else if (command == "help") {
             printHelp();
+        } else if (command.substr(0, 4) == "man ") {
+            lsh::man(command.substr(4));
         } else if (command.substr(0, 3) == "cd ") {
             if (Disk.fchdir(command.substr(3)) != 0) {
                 std::cout << "Directory " << command.substr(3) << " not found.\n";

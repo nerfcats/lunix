@@ -19,6 +19,7 @@ public:
     int lshStart();
 private:
     void printHelp();
+    void man(const std::string& command);
     void changeDirectory(const std::string& path);
     void printWorkingDirectory();
     void catFile(const std::string& filename);
