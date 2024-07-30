@@ -167,7 +167,7 @@ int lsh::lshStart() {
     fs::path rootfsPath = fs::current_path();  // Get the current path after rootfs() has been called
 
     std::cout << "\nWelcome to Lunix, a small simulation OS built on C++" << std::endl;
-    std::cout << "lsh shell 0.1.0; type 'help' for commands\n\n";
+    std::cout << "lsh shell 0.2.0; type 'help' for commands\n\n";
     std::cout << "Current working directory: " << rootfsPath << std::endl;
 
     while (true) {

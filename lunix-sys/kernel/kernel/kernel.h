@@ -9,7 +9,7 @@ class kernel
 public:
     kernel();
     int runlevel = 0;
-    string ver = "Kernel version 0.2.0; Lunix shell 0.1.0";
+    string ver = "Kernel version 0.3.0; Lunix shell 0.2.0";
     /*
      * 0.x: Nova
      */
