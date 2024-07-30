@@ -1,8 +1,6 @@
 #include "error_handler.h"
 #include <iostream>
 #include <fstream>
-#include <thread>
-#include <chrono>
 #include <unistd.h> // for geteuid
 #include <execinfo.h>
 #include <csignal> // for signal handling
@@ -14,7 +12,6 @@
 #include "../color.h"
 
 using namespace std;
-using namespace std::filesystem;
 using namespace ANSIColors;
 
 int oops_count = 0;
@@ -60,8 +57,7 @@ void error_handler::panic(string reason) {
         system("../lunix_bootloader -r");
         exit(1);
     } else {
-        // Hang the system infinitely
-        while (true) {this_thread::sleep_for(chrono::seconds(1));}
+        exit(1);
     }
 }
 
