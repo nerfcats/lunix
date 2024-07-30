@@ -24,11 +24,11 @@ bool Client::pingServer(const char* serverIP, int port) {
     }
 
     if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0) {
-        std::cerr << "Connection Failed\n";
+        std::cerr << "Connection failure\n";
         return false;
     }
 
-    const char* message = "Ping";
+    const char* message = "ping";
     send(sock, message, strlen(message), 0);
     std::cout << "Ping message sent\n";
 

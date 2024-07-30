@@ -290,7 +290,11 @@ int lsh::lshStart() {
         } else if (command == "server stop") {
             server.stop();
         } else if (command == "client ping") {
-            client.pingServer("127.0.0.1", 6942);
+            std::string ipAddr;
+            std::cout << "IP address of the server: ";
+            std::cin >> ipAddr;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            client.pingServer(ipAddr.c_str(), 6942);
         } else if (command == "lulu") {
             std::cout << R"(  /^ ^\
  / 0 0 \
