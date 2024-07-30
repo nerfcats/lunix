@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Function to perform the default action
-default_action() {
+newBuild() {
   cd lunix-sys
   mkdir build
   cd build
@@ -15,7 +15,7 @@ default_action() {
 }
 
 # Function to perform the rebuild action
-rebuild_action() {
+build() {
   cd lunix-sys/build
   make -j$(nproc)
   cd ../../lunix-bl/build
@@ -25,11 +25,14 @@ rebuild_action() {
 # Check if any arguments are passed
 if [ "$#" -eq 0 ]; then
   # No arguments passed
-  default_action
-elif [ "$1" == "--rebuild" ]; then
-  # --rebuild argument passed
-  rebuild_action
+  echo "Usage: $0 [-nb] [-b]"
+elif [ "$1" == "-nb" ]; then
+  # -nb argument passed
+  newBuild
+elif [ "$1" == "-b" ]; then
+  # -b argument passed
+  build
 else
   echo "Unknown argument: $1"
-  echo "Usage: $0 [--rebuild]"
+  echo "Usage: $0 [-nb] [-b]"
 fi

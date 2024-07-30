@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed the prompt to look better
 - Renamed kernel_panic.log and passwords.txt to .passwd and kernel.log
 - Help command is now a lot shorter and readable, use man to get command details
+- Ping 8.8.8.8 instead of github.com
 
 ### Fixed
 - Fixed the prompt to show the correct path (~ instead of full/path/to/rootfs)

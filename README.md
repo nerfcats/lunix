@@ -73,11 +73,11 @@ cd lunix
 
 In the main Lunix directory, run the following command to build Lunix:
 ```
-./Build.sh
+./Build.sh -nb
 ```
-If you have already built Lunix and want to rebuild it, use the `--rebuild` flag:
+If you have already built Lunix and want to rebuild modified source files, use the `-b` flag:
 ```
-./Build.sh --rebuild
+./Build.sh -b
 ```
 
 ### Manual Build
