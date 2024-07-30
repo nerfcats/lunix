@@ -138,7 +138,7 @@ To run Lunix, follow these steps:
 
 The documentation for Lunix is currently a work in progress. We welcome contributions to help improve and expand the documentation.
 
-To access the documentation, please visit the [Documentation](/documentation) page.
+To access the documentation, please visit the [Documentation](/docs) page.
 
 
 ## Contribution
