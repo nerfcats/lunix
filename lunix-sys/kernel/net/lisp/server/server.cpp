@@ -26,10 +26,21 @@ void Server::start() {
 void Server::stop() {
     if (running) {
         running = false;
+        closeAllConnections();
         if (serverThread.joinable()) {
             serverThread.join();
         }
     }
+}
+
+void Server::closeAllConnections() {
+    std::lock_guard<std::mutex> lock(clientMutex);
+    for (int socket : clientSockets) {
+        shutdown(socket, SHUT_RDWR);
+        close(socket);
+    }
+    clientSockets.clear();
+    clientUsernames.clear();
 }
 
 std::string getPrivateIP() {
@@ -62,7 +73,15 @@ std::string getPrivateIP() {
 }
 
 void Server::run() {
+    
     int serverSocket = socket(AF_INET, SOCK_STREAM, 0);
+    // Release the socket if it's already in use
+    int opt = 1;
+    if (setsockopt(serverSocket, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt))) {
+        std::cerr << "Error setting socket options\n";
+        close(serverSocket);
+        return;
+    }
     if (serverSocket == -1) {
         std::cerr << "Error creating socket\n";
         return;
@@ -134,12 +153,36 @@ void Server::run() {
     close(serverSocket);
 }
 
+void Server::broadcastMessage(const std::string& message, int senderSocket) {
+    std::lock_guard<std::mutex> lock(clientMutex);
+    for (int socket : clientSockets) {
+        send(socket, message.c_str(), message.length(), 0);
+    }
+}
+
+void Server::broadcastSystemMessage(const std::string& message) {
+    std::string broadcastMessage = "SYSTEM: " + message;
+    std::cout << "Broadcasting system message: " << broadcastMessage << std::endl;
+    this->broadcastMessage(broadcastMessage, -1);  // -1 indicates it's a system message
+}
+
+void Server::handleChatCommand(const std::string& message, int clientSocket) {
+    std::string username = clientUsernames[clientSocket];
+    std::string broadcastMessage = username + ": " + message;
+    std::cout << "Broadcasting: " << broadcastMessage << std::endl;
+    this->broadcastMessage(broadcastMessage, clientSocket);
+}
+
 void Server::handleClient(int clientSocket) {
     char buffer[1024] = {0};
     std::string username;
     bool authenticated = false;
 
     std::cout << "New client connected." << std::endl;
+    {
+        std::lock_guard<std::mutex> lock(clientMutex);
+        clientSockets.push_back(clientSocket);
+    }
 
     while (running) {
         memset(buffer, 0, sizeof(buffer));
@@ -162,10 +205,19 @@ void Server::handleClient(int clientSocket) {
             std::cout << "User set: '" << username << "'" << std::endl;
             response = "USER_OK";
             authenticated = true;
+            clientUsernames[clientSocket] = username;
+            broadcastSystemMessage(username + " has joined the chat.");
         } else if (command == "DISS") {
             response = "200";
             std::cout << "Client requested disconnect." << std::endl;
             break;
+        } else if (command.substr(0, 5) == "CHAT ") {
+            if (authenticated) {
+                handleChatCommand(command.substr(5), clientSocket);
+                continue;  // Skip sending a response, as we've already broadcast the message
+            } else {
+                response = "NOT_AUTHENTICATED";
+            }
         } else {
             response = "BAD_REQ";
         }
@@ -179,5 +231,8 @@ void Server::handleClient(int clientSocket) {
     }
 
     close(clientSocket);
+    if (authenticated) {
+        broadcastSystemMessage(username + " has left the chat.");
+    }
     std::cout << "Client handler thread ending." << std::endl;
 }
