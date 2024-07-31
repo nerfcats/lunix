@@ -14,6 +14,7 @@ public:
 
 private:
     void run();
+    void handleClient(int clientSocket);
     std::thread serverThread;
     std::atomic<bool> running;
     const int PORT = 6942;

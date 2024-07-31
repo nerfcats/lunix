@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <ifaddrs.h>
 #include <arpa/inet.h>
+#include <thread>
 
 Server::Server() : running(false) {}
 
@@ -122,18 +123,61 @@ void Server::run() {
                 continue;
             }
 
-            char buffer[1024] = {0};
-            read(clientSocket, buffer, 1024);
-            std::cout << "Client sent: " << buffer << std::endl;
-
-            const char* response = "pong";
-            send(clientSocket, response, strlen(response), 0);
-
-            close(clientSocket);
+            // Handle client in a separate thread
+            std::thread clientThread(&Server::handleClient, this, clientSocket);
+            clientThread.detach();
         }
     }
 
     // Close port and socket before continuing
     shutdown(serverSocket, SHUT_RDWR);
     close(serverSocket);
+}
+
+void Server::handleClient(int clientSocket) {
+    char buffer[1024] = {0};
+    std::string username;
+    bool authenticated = false;
+
+    std::cout << "New client connected." << std::endl;
+
+    while (running) {
+        memset(buffer, 0, sizeof(buffer));
+        int bytesRead = read(clientSocket, buffer, 1024);
+        if (bytesRead <= 0) {
+            std::cout << "Client disconnected." << std::endl;
+            break;
+        }
+
+        std::string command(buffer);
+        std::cout << "Client sent: '" << command << "'" << std::endl;
+
+        std::string response;
+        if (command == "PING") {
+            response = "200";
+        } else if (command == "CONN_REQ") {
+            response = "100";
+        } else if (command.substr(0, 8) == "USER_SET") {
+            username = command.substr(9);  // Skip "USER_SET " prefix
+            std::cout << "User set: '" << username << "'" << std::endl;
+            response = "USER_OK";
+            authenticated = true;
+        } else if (command == "DISS") {
+            response = "200";
+            std::cout << "Client requested disconnect." << std::endl;
+            break;
+        } else {
+            response = "BAD_REQ";
+        }
+
+        std::cout << "Sending response: '" << response << "'" << std::endl;
+        int bytesSent = send(clientSocket, response.c_str(), response.length(), 0);
+        if (bytesSent <= 0) {
+            std::cerr << "Error sending response to client" << std::endl;
+            break;
+        }
+    }
+
+    close(clientSocket);
+    std::cout << "Client handler thread ending." << std::endl;
 }

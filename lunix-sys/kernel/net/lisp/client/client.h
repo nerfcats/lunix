@@ -5,6 +5,7 @@ class Client {
 public:
     Client();
     bool pingServer(const char* serverIP, int port);
+    bool connectToServer(const char* serverIP, int port);
 };
 
 #endif // CLIENT_H

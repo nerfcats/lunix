@@ -295,6 +295,12 @@ int lsh::lshStart() {
             std::cin >> ipAddr;
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             client.pingServer(ipAddr.c_str(), 6942);
+        } else if (command == "client connect") {
+            std::string ipAddr;
+            std::cout << "IP address of the server: ";
+            std::cin >> ipAddr;
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            client.connectToServer(ipAddr.c_str(), 6942);
         } else if (command == "lulu") {
             std::cout << R"(  /^ ^\
  / 0 0 \
