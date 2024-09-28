@@ -24,7 +24,7 @@ error_handler::error_handler() {}
 void error_handler::panic(string reason) {
     // Capture panic information
     std::stringstream panic_info;
-    panic_info << BG_RED << BOLD_WHITE << "\nKernel panic: " << reason << endl;
+    panic_info << BG_BLUE << BOLD_WHITE << "\nKernel panic: " << reason << endl;
     panic_info << "Stack trace:\n";
 
     const int maxFrames = 64;
