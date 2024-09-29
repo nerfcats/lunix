@@ -114,13 +114,13 @@ int main(int argc, char* argv[]) {
 
         if (computedHash != expectedHash) {
             if (ignoreHashError) {
-                std::cerr << BOLD_YELLOW << "WARNING: HASH MISMATCH! The kernel is either CORRUPTED or possibly TAMPERED with.\nYour machine is now at risk." << RESET << std::endl;
+                std::cerr << BOLD_YELLOW << "KERNEL INTEGRITY CHECK FAIL: The stored hash and the kernel binary does not match. You may be loading a bad kernel binary." << RESET << std::endl;
             } else {
-                std::cerr << BOLD_RED << "HASH MISMATCH! The kernel is either CORRUPTED or possibly TAMPERED with.\nTo unlock the bootloader and continue anyways, run the bootloader with --ignore-hash-err" << RESET << std::endl;
+                std::cerr << BOLD_RED << "KERNEL INTEGRITY CHECK FAIL: The stored hash and the kernel binary does not match. You may be loading a bad kernel binary. Try rebuilding the system." << RESET << std::endl;
                 return 1;
             }
         } else {
-            std::cerr << BOLD_GREEN << "Kernel hash check passed!" << RESET << std::endl;
+            std::cerr << BOLD_GREEN << "Kernel integrity check passed" << RESET << std::endl;
         }
     } catch (const std::exception &e) {
         std::cerr << BOLD_RED << "Error: " << e.what() << RESET << std::endl;

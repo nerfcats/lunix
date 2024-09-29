@@ -3,7 +3,8 @@
 cd lunix-bl/build
 
 if [ -e "lunix-bl" ]; then
-  ./lunix-bl -b # Run the bootloader with the -b arg to run the post-build script
+  # To bypass hash checks run with --ignore-hash-err
+  ./lunix-bl # Run the bootloader
 else
   echo "The bootloader doesn't exist. Have you built Lunix properly? Were there any build errors?"
 fi
