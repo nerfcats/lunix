@@ -25,7 +25,7 @@ void error_handler::panic(string reason) {
     // Capture panic information
     std::stringstream panic_info;
     panic_info << BG_BLUE << BOLD_WHITE << "\nKernel panic: " << reason << endl;
-    panic_info << "Stack trace:\n";
+    panic_info << "[STACK TRACE START]\n";
 
     const int maxFrames = 64;
     void* buffer[maxFrames];
@@ -42,10 +42,10 @@ void error_handler::panic(string reason) {
     }
 
     // Add more debugging information
-    panic_info << "System has panicked...\n";
-    panic_info << "OS Version: " << Kernel.ver << endl; // Replace with actual version
+    panic_info << "The kernel has been halted due to a fatal error or critical condition. If this is a bug, please report this on the GitHub issue tracker.\n";
+    panic_info << "Version string(s): " << Kernel.ver << endl; // Replace with actual version
 
-    panic_info << "\nend Kernel panic: " << reason << RESET << endl;
+    panic_info << "\n[STACK TRACE END] \nKernel panic: " << reason << RESET << endl;
 
     // Output the panic information
     std::cout << panic_info.str();
