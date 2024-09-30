@@ -16,6 +16,8 @@ public:
     // Configure root filesystem folder
     void rootfs();
 
+    int loadMod(const std::string& modName);
+
     // File operations
     std::fstream fs;
     int fopen(const std::string& filename, std::ios::openmode mode);
@@ -38,6 +40,7 @@ public:
     std::string fcwd();
 
 private:
+    std::string rootfsAbsolutePath; // Moved to private section
     std::vector<std::ifstream*> openInputFiles;
     std::vector<std::ofstream*> openOutputFiles;
 };

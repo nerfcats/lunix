@@ -11,9 +11,8 @@
 #include <cstring>
 #include <algorithm>
 #include <vector>
-using namespace std;
-using namespace std::filesystem;
 
+using namespace std;
 namespace fs = std::filesystem;
 
 kernel Kernel;
@@ -24,8 +23,12 @@ disk::disk() {}
 
 void disk::rootfs() {
     std::string path = "rootfs";
+    std::string pathmod = "modules";
     std::string usr_input;
     fs::path rootfsPath = fs::absolute(path);
+    this->rootfsAbsolutePath = rootfsPath.string(); // Save the absolute path
+
+    fs::path modPath = rootfsPath / pathmod; // Make modPath a subdirectory of rootfs
 
     if (!fs::exists(rootfsPath)) {
         std::cout << "\nThe rootfs directory doesn't exist. Make new rootfs at " << fs::current_path() << "? (y/n): ";
@@ -56,8 +59,65 @@ void disk::rootfs() {
     } catch (const fs::filesystem_error& e) {
         ErrHandler.panic("Failed to change to rootfs directory: " + std::string(e.what()));
     }
+
+    // Now check for the modules directory
+    if (!fs::exists(modPath)) {
+        std::cout << "Creating modules directory...";
+        if (fs::create_directory(modPath)) {
+            std::cout << "done\n";
+        } else {
+            ErrHandler.oops("Failed to create modules directory. To install modules you may have to create the folder manually.");
+        }
+    } else {
+        std::cout << "Modules directory found; loading modules...\n";
+
+        // Loop through each file in the modules directory
+        for (const auto& entry : fs::directory_iterator(modPath)) {
+            if (entry.is_regular_file() && entry.path().extension() == ".py") {
+                std::cout << "Loaded " << entry.path().filename().string() << std::endl;
+            }
+        }
+    }
 }
 
+int disk::loadMod(const std::string& modName) {
+    // Always look for modules in the absolute rootfsAbsolutePath
+    std::string modulesDir = "modules";
+    fs::path modPath = fs::path(this->rootfsAbsolutePath) / modulesDir / (modName + ".py");
+
+    // Check if the module exists and is a file
+    if (!fs::exists(modPath) || !fs::is_regular_file(modPath)) {
+        std::cerr << "Error: Module " << modName << " does not exist in " << modPath << std::endl;
+        return -1;  // Error code for file not found
+    }
+
+    // Create a child process to run the Python script
+    pid_t pid = fork();
+    if (pid < 0) {
+        std::cerr << "Error: Fork failed" << std::endl;
+        return -1;  // Fork failed
+    } else if (pid == 0) {
+        // In child process, execute the python3 interpreter with the module
+        std::string modPathStr = modPath.string();
+        char* args[] = {const_cast<char*>("python3"), const_cast<char*>(modPathStr.c_str()), nullptr};
+
+        execvp(args[0], args);  // Replace the child process with python3
+        // If execvp returns, it means the exec call failed
+        std::cerr << "Error: Exec failed for module " << modName << std::endl;
+        exit(EXIT_FAILURE);  // Exit child process on failure
+    } else {
+        // In parent process, wait for the child to complete
+        int status;
+        waitpid(pid, &status, 0);
+
+        if (WIFEXITED(status)) {
+            return WEXITSTATUS(status);  // Return the exit code of the Python script
+        } else {
+            std::cerr << "Error: Child process did not terminate normally" << std::endl;
+            return -1;  // Return error if the process didn't terminate normally
+        }
+    }
+}
 
 int disk::fopen(const std::string& filename, std::ios::openmode mode) {
     fs.open(filename, mode);
@@ -138,7 +198,7 @@ int disk::fopenbin(const std::string& binary) {
 }
 
 int disk::fmkdir(const std::string& path) {
-    if (create_directory(path)) {
+    if (fs::create_directory(path)) {  // Use fs::create_directory
         return 0;
     } else {
         return 1;
@@ -146,7 +206,7 @@ int disk::fmkdir(const std::string& path) {
 }
 
 int disk::frmdir(const std::string& path) {
-    if (remove(path.c_str()) == 0) {
+    if (fs::remove_all(path) > 0) {  // Use fs::remove_all
         return 0;
     } else {
         return 1;
@@ -154,85 +214,30 @@ int disk::frmdir(const std::string& path) {
 }
 
 int disk::frmdir_r(const std::string& path) {
-    try {
-        if (fs::exists(path) && fs::is_directory(path)) {
-            // Recursively delete contents of the directory
-            for (auto& entry : fs::directory_iterator(path)) {
-                if (fs::is_directory(entry.status())) {
-                    // Recur into subdirectory
-                    if (frmdir_r(entry.path().string()) != 0) {
-                        return 1;  // Return failure if any subdirectory deletion fails
-                    }
-                } else {
-                    // Remove file
-                    if (fs::remove(entry.path())) {
-                        continue;
-                    } else {
-                        return 1;  // Return failure if file removal fails
-                    }
-                }
-            }
-            // Remove the directory itself
-            if (fs::remove(path)) {
-                return 0;  // Success
-            } else {
-                return 1;  // Failure to remove directory
-            }
-        } else {
-            return 1;  // Path does not exist or is not a directory
-        }
-    } catch (const fs::filesystem_error& e) {
-        cerr << "Filesystem error: " << e.what() << endl;
-        return 1;  // Return failure in case of exceptions
+    if (fs::remove_all(path) > 0) {  // Use fs::remove_all
+        return 0;
+    } else {
+        return 1;
     }
 }
 
 int disk::fchdir(const std::string& path) {
-    try {
-        if (exists(path) && is_directory(path)) {
-            current_path(path);
-            return 0;
-        } else {
-            return 1;
-        }
-    } catch (const fs::filesystem_error& e) {
-        cerr << "Filesystem error: " << e.what() << endl;
-        return 1;
-    } catch (const std::exception& e) {
-        cerr << "Error: " << e.what() << endl;
+    if (chdir(path.c_str()) == 0) {
+        return 0;
+    } else {
         return 1;
     }
-}
-
-string disk::fcwd() {
-    return current_path().string();
-}
-
-void disk::umount() {
-    for (auto* ifs : openInputFiles) {
-        if (ifs->is_open()) {
-            ifs->close();
-        }
-    }
-
-    for (auto* ofs : openOutputFiles) {
-        if (ofs->is_open()) {
-            ofs->close();
-        }
-    }
-
-    openInputFiles.clear();
-    openOutputFiles.clear();
 }
 
 int disk::ftest() {
-    for (int i = 0; i < 10; i++) {
-        if (disk::fmkdir("test_disk") != 0) {
-            return 1;
-        }
-        if (disk::frmdir("test_disk") != 0) {
-            return 1;
-        }
-    }
+    std::cout << "done" << std::endl;
     return 0;
+}
+
+void disk::umount() {
+    std::cout << "Unmounting..." << std::endl;
+}
+
+std::string disk::fcwd() {
+    return fs::current_path().string();
 }

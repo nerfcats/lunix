@@ -8,13 +8,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Functioning client and server (LISP: Lunix Inter-terminal Server Protocol)
+- Improved kernel panic info
+- Support for python modules
 
 ### Changed
+- Kernel panic bg color from red to blue
 
 ### Fixed
 
 ### Removed
+- Lulu easter egg (sad)
 
 ## [0.3.0] - 07-30-24
 

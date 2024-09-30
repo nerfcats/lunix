@@ -84,24 +84,6 @@ void kernel::start() {
 
     Disk.rootfs();
 
-    try {
-        // List USB devices
-        std::string usbDevices = dexec("lsusb");
-        // List PCI devices
-        std::string pciDevices = dexec("lspci");
-        // List block devices
-        std::string blockDevices = dexec("lsblk");
-        // List devices in /dev
-        //std::string devDevices = dexec("ls /dev");
-
-        // Concatenate and print results
-        std::string result = "Connected USB devices: " + usbDevices + " Connected PCI devices: " + pciDevices +
-                             " Connected Block devices: " + blockDevices; // + " Devices in /dev: " + devDevices
-        std::cout << result << std::endl;
-    } catch (const std::exception &e) {
-        std::cerr << "Error: " << e.what() << std::endl;
-    }
-
     kernel::crl(2);
     std::cout << std::endl;
     // Additional startup stuff

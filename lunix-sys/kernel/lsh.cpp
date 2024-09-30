@@ -32,6 +32,8 @@ UserManager userManager;
 Server server;
 Client client;
 
+std::string python_bin;
+
 lsh::lsh() {}
 
 void lsh::printHelp() {
@@ -47,6 +49,7 @@ void lsh::printHelp() {
         {"nano", "Run the Nano text editor"},
         {"passwd", "Change the password for a user (root only)"},
         {"pwd", "Print the current working directory"},
+        {"mod", "Run a module"},
         {"rl", "Display the current system runlevel"},
         {"rm", "Remove a file or empty directory\n"
              "  Use -R to delete a directory and its contents recursively"},
@@ -72,6 +75,7 @@ void lsh::man(const std::string& command) {
     const std::vector<std::pair<std::string, std::string>> commands = {
         {"cat <file>", "Display the contents of a file"},
         {"cd <directory>", "Change the current working directory"},
+        {"mod <module-name>", "Run a python module that adds functionality to Lunix. (e.g. a module that scans the directory for a file). Modules can be used as commands. Startup modules have a startup function that runs on Lunix boot."},
         {"chmod <args>", "Change the permissions of a file or directory"},
         {"editor <file>", "Open a simple text editor (use 'nano' for more advanced features)"},
         {"exit", "Exit the shell"},
@@ -301,15 +305,19 @@ int lsh::lshStart() {
             std::cin >> ipAddr;
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             client.connectToServer(ipAddr.c_str(), 6942);
-        } else if (command == "lulu") {
-            std::cout << R"(  /^ ^\
- / 0 0 \
- V\ Y /V
-  / - \
- /    |
-V__) ||
-)";
-        } else {
+        } else if (command.substr(0, 3) == "mod") {
+            // Check if the command length is sufficient to avoid out_of_range exception
+            if (command.length() < 4) {
+                std::cout << "Usage: mod <module-name>\n";
+            } else {
+                std::string moduleName = command.substr(4);
+                std::cout << "Loading module " << moduleName << "\n";
+                if (Disk.loadMod(moduleName) != 0) {
+                    std::cout << "An error occurred loading the module\n";
+                }
+            }
+        }
+        else {
             std::cout << "Command not found: " << command << std::endl;
         }
     }
