@@ -92,7 +92,7 @@ void kernel::start() {
     } else {
         std::cout << "[" << RED << "FAILED" << RESET << "] " << "Failed to test network\n";
     }
-    cout << "         Testing disk reliability...\n";
+    cout << "         Testing disk reliability...";
     if (Disk.ftest() == 0) {
         std::cout << "[  " << GREEN << "OK" << RESET << "  ] " << "Disk test PASS\n";
     } else {

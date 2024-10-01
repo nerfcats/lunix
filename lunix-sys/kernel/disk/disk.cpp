@@ -49,7 +49,7 @@ void disk::rootfs() {
             return;
         }
     } else {
-        std::cout << "Rootfs exists.\n";
+        std::cout << "done\n";
     }
 
     std::cout << "Changing to rootfs directory...\n";
