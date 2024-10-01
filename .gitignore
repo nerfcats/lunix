@@ -35,3 +35,5 @@
 /lunix-bl/build
 /.vscode
 !/lunix-bl/build/post-build.sh
+!/lunix-bl/build/bin
+!/lunix-bl/build/bin/*
